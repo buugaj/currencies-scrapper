@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import logging
 from celery import task
-from currencies.models import Currency, ExchangeRate
+from currencies.models import ExchangeRate
 from currencies.scrapper import scrap_rss_urls, scrap_currency_rss
 
 logger = logging.getLogger("celery")
@@ -25,8 +25,8 @@ def scrap_currencies():
         try:
             results.extend(scrap_currency_rss(url))
         except Exception as e:
-            logger.error("Scrappign url {} failed with error:".format(url))
+            logger.error("Scrapping url {} failed with error:".format(url))
             logger.error(e)
             return
-    print(results)
+    ExchangeRate.objects.bulk_insert_or_update_insert_new_related(results)
     logger.info("-"*25)

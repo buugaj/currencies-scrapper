@@ -6,12 +6,15 @@ logger = logging.getLogger("Celery")
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 
-app = Celery('mydjango')
+app = Celery('config')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
-app.send_task('currencies.tasks.scrap_currencies')
+
+@app.on_after_configure.connect
+def start_after_configured_tasks(sender, **kwargs):
+    sender.send_task('currencies.tasks.scrap_currencies')
 
 @app.task(bind=True)
 def debug_task(self):
