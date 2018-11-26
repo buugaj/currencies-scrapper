@@ -19,7 +19,7 @@ Postgres, Nginx, Redis, Celery, Django
 2. Pull repository
 3. Navigate to folder with repository
 4. `make up` to build the project and start containers.
-5. Browse the api on http://localhost:8000
+5. Browse the api on http://127.0.0.1:8000
 
 ### More commands
 2. `make build` to build the project.
