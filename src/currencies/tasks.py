@@ -1,14 +1,32 @@
 from __future__ import absolute_import, unicode_literals
 import logging
 from celery import task
-from django.conf import settings
-
+from currencies.models import Currency, ExchangeRate
+from currencies.scrapper import scrap_rss_urls, scrap_currency_rss
 
 logger = logging.getLogger("celery")
 
 
 @task
-def show_hello_world():
+def scrap_currencies():
     logger.info("-"*25)
-    logger.info("Printing Hello from Celery")
+    logger.info("Scrapping rss urls")
+
+    try:
+        urls = scrap_rss_urls()
+    except Exception as e:
+        logger.error("Scrapping rss urls failed with error:")
+        logger.error(e)
+        return
+
+    results = []
+    for url in urls:
+        logger.info("Scrapping url {}".format(url))
+        try:
+            results.extend(scrap_currency_rss(url))
+        except Exception as e:
+            logger.error("Scrappign url {} failed with error:".format(url))
+            logger.error(e)
+            return
+    print(results)
     logger.info("-"*25)
