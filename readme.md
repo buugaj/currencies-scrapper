@@ -4,7 +4,7 @@ Data is stored in Postgres database and accessible via REST API.
 
 Rates are scrapped on application start and every day on 14:17 (2 minutes after official release).
 #### Technology stack:
-Postgres, Nginx, Redis, Celery, Django
+Postgres, Nginx, Redis, Celery, Django, Django REST Framework
 #### Time sheet:
 1. 20:30-21:30
 2. 23:00-00:45
