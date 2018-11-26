@@ -16,8 +16,10 @@ Postgres, Nginx, Redis, Celery, Django
 ####Prerequisites:
 
 1. Install docker  https://docs.docker.com/install
-2. `make up` to build the project and start containers.
-3. Browse the api on http://localhost:8000
+2. Pull repository
+3. Navigate to folder with repository
+4. `make up` to build the project and start containers.
+5. Browse the api on http://localhost:8000
 
 ### More commands
 2. `make build` to build the project.
