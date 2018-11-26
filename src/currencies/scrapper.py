@@ -30,3 +30,4 @@ def scrap_currency_rss(url):
         target_currency = item.find('cb:targetcurrency').text
         exchange_rate =  Decimal(item.find('cb:value').text)
         results.append(ScrapResult(date,base_currency,target_currency,exchange_rate))
+    return results
