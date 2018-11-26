@@ -126,6 +126,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_TIMEZONE = 'CET'
+# The following lines may contains pseudo-code
+from celery.schedules import crontab
+# Other Celery settings
+CELERY_BEAT_SCHEDULE = {
+    'scrap_currencies': {
+        'task': 'currencies.tasks.scrap_currencies',
+        'schedule': crontab(minute=17, hour=14),
+    },
+}
 
 STATIC_ROOT = './static/'
 MEDIA_ROOT = '/media/'
