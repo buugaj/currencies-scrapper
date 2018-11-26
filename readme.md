@@ -8,7 +8,7 @@ Postgres, Nginx, Redis, Celery, Django
 #### Time sheet:
 1. 20:30-21:30
 2. 23:00-00:45
-####TODO:
+#### TODO:
 * add filtering by dates and currencies
 * add reporting errors via email
 * add backoff if new results are not present @14:17 CET
