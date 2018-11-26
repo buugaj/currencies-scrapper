@@ -37,5 +37,7 @@ class ExchangeRate(models.Model):
     target_currency = models.ForeignKey(Currency,related_name='target_currency', on_delete=models.PROTECT)
     rate = models.DecimalField(max_digits=16,decimal_places=8)
     objects = ExchangeRateManager()
+    class Meta:
+        unique_together = (("date", "base_currency", "target_currency"),)
 
 
